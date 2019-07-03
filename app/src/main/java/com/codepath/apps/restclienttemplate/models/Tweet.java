@@ -10,7 +10,7 @@ public class Tweet {
     public String createdAt;
 
     //there is a user object for each tweet so to support that I need a user class
-    //public User user;
+    public User user;
 
     //take JSON object and instantiate tweet object and deserialize the data
     //the method takes in a JSON object and gives back a tweet object
@@ -22,6 +22,8 @@ public class Tweet {
         tweet.body = jsonObject.getString("text");
         tweet.uid = jsonObject.getLong("id");
         tweet.createdAt = jsonObject.getString("created_at");
+        tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
+        
         return tweet;
 
     }
