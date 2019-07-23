@@ -13,6 +13,7 @@ import cz.msebera.android.httpclient.Header;
 
 public class TimelineActivity extends AppCompatActivity {
 
+
     private TwitterClient client;
 
     @Override
@@ -20,7 +21,7 @@ public class TimelineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
-        client = TwitterApp.getRestClient();
+        client = TwitterApp.getRestClient(this);
         populateTimeline();
     }
 
