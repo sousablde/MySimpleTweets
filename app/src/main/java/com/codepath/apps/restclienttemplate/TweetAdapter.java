@@ -39,6 +39,22 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
     //bind the values based on the position of the element
 
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        //get data according to position
+        Tweet tweet = mTweets.get(position);
+        //populate the views according to this data
+        holder.tvUsername.setText(tweet.user.name);
+        holder.tvBody.setText(tweet.body);
+    }
+
+    //get the item count that we should be displaying
+
+    @Override
+    public int getItemCount() {
+        return mTweets.size();
+    }
+
     //create the viewholder class
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
