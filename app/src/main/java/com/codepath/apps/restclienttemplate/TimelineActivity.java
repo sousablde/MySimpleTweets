@@ -10,6 +10,7 @@ import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -73,7 +74,23 @@ public class TimelineActivity extends AppCompatActivity {
              */
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                Log.d("TwitterClient", response.toString());
+                //Log.d("TwitterClient", response.toString());
+
+                //iterate through json array
+
+                //for each entry deserialize json object
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        //convert each object to a tweet model
+                        Tweet tweet = Tweet.fromJSON(response.getJSONObject(i));
+                        //add tweet model to our data source
+                        tweets.add(tweet);
+                        //notify adapter that we've added an item
+                        tweetAdapter.notifyItemInserted(tweets.size() - 1);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
 
             /**
